@@ -1,0 +1,9 @@
+requests.get() /  take in url, return <class requests>, it's python object
+response.json() /  take nothing, return dictionary, convert <class requests> to <class dict>
+json.dump() /  take a Python object, write into a file as a JSON file
+json.dumps() /  take a Python object, write into a file as a JSON String
+json.load() /  takes a JSON file object and convert to dict
+json.loads() /  takes a JSON string and convert it into dict
+
+
+What i have learned:
