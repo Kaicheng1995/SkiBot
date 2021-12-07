@@ -1,4 +1,7 @@
+from operation import Operation
 from weather import Weather
+
+
 
 class Resort:
     # each resort shares the same api key
@@ -8,8 +11,12 @@ class Resort:
     def __init__(self, name, resort_id):
         self.name = name
         self.resort_id = resort_id
-        self.location = ""
-        self.rating = ""
+        # self.rating = self.operation.rating
+        # self.location = self.operation.location
+
+
+        # operation info
+        self.operation = Operation()
 
         # forecasted weather (7 days)
         self.weather = [Weather(), Weather(), Weather(),
@@ -19,24 +26,6 @@ class Resort:
         self.tickets = None
         self.hotels = None
         self.restaurants = None
-
-
-    # set location and rating
-    def set_base(self, location, rating):
-        self.location = location
-        self.rating = rating
-
-    # set weather
-    def set_weather(self):
-        seven_day = []
-        for i in range(7):
-            seven_day.append(one_day)
-        self.weather = seven_day
-
-
-    # tickets is a Python dictionary
-    def set_tickets(self, tickets):
-        self.tickets = tickets
 
     # hotel
     def set_hotels(self, hotels):

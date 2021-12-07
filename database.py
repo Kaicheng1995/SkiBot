@@ -1,7 +1,6 @@
 from resort import Resort
 import requests
-import json
-from datetime import datetime, date, timedelta
+from datetime import date, timedelta
 
 
 '''
