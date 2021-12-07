@@ -2,6 +2,10 @@ class Operation:
 
     # initialize an empty object
     def __init__(self):
+        # source for web scraping
+        self.url = None
+        self.html = None
+        # the data collected from the url
         self.status = ""
         self.open_date = ""
         self.close_date = ""
@@ -12,32 +16,12 @@ class Operation:
         self.rating = ""
         self.location = ""
 
-    # set value to weather object
-    def set_weather(self,
-                    date,
-                    wx_desc,
-                    snow_in,
-                    rain_in,
-                    vis_mi,
-                    slp_in,
-                    temp_f,
-                    windspd_mph):
-        self.date = date
-        self.wx_desc = wx_desc
-        self.snow_in = snow_in
-        self.rain_in = rain_in
-        self.vis_mi = vis_mi
-        self.slp_in = slp_in
-        self.temp_f = temp_f
-        self.windspd_mph = windspd_mph
+    # set the url and html used for web scraping
+    def set_source(self, url, html):
+        self.url = url
+        self.html = html
 
-    def __str__(self):
-        out = "Date: " + str(self.date) + "\n" + \
-              "Weather: " + str(self.wx_desc) + "\n" + \
-              "Snowfall (inch): " + str(self.snow_in) + "\n" + \
-              "Rainfall (inch): " + str(self.rain_in) + "\n" + \
-              "Visibility (inch): " + str(self.vis_mi) + "\n" + \
-              "Humidity Level (miles): " + str(self.slp_in) + "\n" + \
-              "Temperature (F): " + str(self.temp_f) + "\n" + \
-              "Wind Speed: (mhp): " + str(self.windspd_mph)
-        return out
+    # set open and close dates
+    def set_operating_dates(self, open, close):
+        self.open_date = open
+        self.close_date = close

@@ -2,10 +2,9 @@ from resort import Resort
 import requests
 from datetime import date, timedelta
 
-
 '''
 ***************************
-    1/ GET WEATHER DATA
+    GET WEATHER DATA
 ***************************
 '''
 
@@ -20,7 +19,6 @@ gore = Resort("Gore Mountain", "518005")
 heavenly = Resort("Heavenly", "916004")
 # combine all resorts objects to a list
 Resorts = [kirkwood, aspen, crystal, gore, heavenly]
-
 
 # get JSON object
 def request(r_id, app_id, app_key):
@@ -81,11 +79,3 @@ def set_weather_helper(forecast_date, raw_data, each_resort, kth_day):
 
 # populate the core weather data into resort object
 set_weather()
-
-
-
-'''
-***************************
-    2/ GET  DATA
-***************************
-'''

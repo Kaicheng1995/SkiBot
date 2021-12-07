@@ -1,3 +1,21 @@
+reference url
+https://stackoverflow.com/questions/25341945/check-if-string-has-date-any-format
+https://realpython.com/python-web-scraping-practical-introduction/
+https://www.dataquest.io/blog/python-api-tutorial/
+
+
+
+
+
+________________________
+future extension:
+- running speed
+
+
+
+
+
+_________________________
 requests.get() /  take in url, return <class requests>, it's python object
 response.json() /  take nothing, return dictionary, convert <class requests> to <class dict>
 json.dump() /  take a Python object, write into a file as a JSON file
@@ -9,4 +27,16 @@ json.loads() /  takes a JSON string and convert it into dict
 What i have learned:
 api request, data collection, data processing
 class distribution??
-get current date
+time package - get current date
+
+comment 规范？
+
+web scraping:
+- read url and get html string
+    - urlopen()
+    - HTTPResponse object’s .read()
+    - bytes.decode()
+
+- Extract Text From HTML With String Methods
+    - string.find()
+    - re.findall()
