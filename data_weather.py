@@ -1,6 +1,7 @@
-from resort import Resort
+from main import Resorts
 import requests
 from datetime import date, timedelta
+
 
 '''
 ***************************
@@ -11,14 +12,10 @@ from datetime import date, timedelta
 APP_ID = "39eba088"
 APP_KEY = "fe507959f9cfd3f54af726fc36e63d9a"
 
-# create 5 Resort objects
-kirkwood = Resort("Kirkwood", "209004")
-aspen = Resort("Aspen Snowmass", "303020")
-crystal = Resort("Crystal Mountain", "414002")
-gore = Resort("Gore Mountain", "518005")
-heavenly = Resort("Heavenly", "916004")
-# combine all resorts objects to a list
-Resorts = [kirkwood, aspen, crystal, gore, heavenly]
+# set resort id from api
+resort_ids = ["209004", "303020", "414002", "518005", "916004"]
+for i in range(len(Resorts)):
+    Resorts[i].set_id(resort_ids[i])
 
 # get JSON object
 def request(r_id, app_id, app_key):

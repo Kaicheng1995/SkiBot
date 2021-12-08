@@ -1,5 +1,5 @@
+from main import Resorts
 from urllib.request import urlopen
-from data_weather import Resorts
 from dateutil.parser import parse
 from datetime import datetime
 import re
@@ -82,6 +82,8 @@ for resort in Resorts:
 
 """
    ***************************
-   1/ GET OPEN & CLOSE DATES
+   2/ GET LIFTS & PRICES
    ***************************
 """
+
+def
