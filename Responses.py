@@ -1,24 +1,10 @@
-from resort import Resort
-from data_weather import *
+from database import *
 
 
-"""
-    Populate resort objects with all data
-"""
-# create 5 Resort objects
-kirkwood = Resort("Kirkwood")
-aspen = Resort("Aspen Snowmass")
-crystal = Resort("Crystal Mountain")
-gore = Resort("Gore Mountain")
-heavenly = Resort("Heavenly")
+# get real time Resorts data
+Resorts = populate_data()
 
-# append all resorts objects to a list
-Resorts = [kirkwood, aspen, crystal, gore, heavenly]
-
-
-set_weather(Resorts)
-
-# print(type(Resorts[0].weather[0].date))
+# conversation logic
 def sample_responses(input_text):
     user_message = str(input_text).lower()
     if user_message in ("hello", "hi", "sup",):

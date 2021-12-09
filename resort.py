@@ -1,8 +1,6 @@
 from operation import Operation
 from weather import Weather
 
-
-
 class Resort:
     # each resort shares the same api key
     APP_ID = "39eba088"
