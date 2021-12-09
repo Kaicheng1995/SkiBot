@@ -34,3 +34,9 @@ class Operation:
         self.youth_price = youth_price
         self.child_price = child_price
 
+    # set rating and location
+    def set_rating_location(self, rating, location):
+        self.rating = rating
+        self.location = location
+
+

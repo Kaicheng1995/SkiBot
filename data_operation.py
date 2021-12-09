@@ -5,11 +5,30 @@ from resort import Resort
 from datetime import datetime
 import re
 
+
+"""
+   SUMMARY: set operating data into Resort objects list   
+   1/ SET URL & HTML
+   2/ SET OPEN & CLOSE DATES
+   3/ SET #LIFTS & PRICES 
+"""
+
+def set_operation(Resorts):
+    set_url_and_html(Resorts)
+    set_operating_dates(Resorts)
+    set_lifts_and_prices(Resorts)
+
+
+
+"""
+   ***************************
+   1/ SET URL & HTML
+   ***************************
+"""
 """
     takes an url and return html string
     :param url: the link used for web scraping
 """
-
 
 def get_html(url):
     # pass url to open the web page, return an HTTPResponse object
@@ -28,7 +47,6 @@ def get_html(url):
     :param Resorts: the Resorts list
 """
 
-
 def set_url_and_html(Resorts):
     # the suffix of each resorts' url
     url_suffix = ["kirkwood", "aspen-mountain", "crystal-mountain-wa",
@@ -41,22 +59,7 @@ def set_url_and_html(Resorts):
 
 """
    ***************************
-   SUMMARY: set operating data into Resort objects list
-   
-   1/ SET URL & HTML
-   2/ SET OPEN & CLOSE DATES
-   ***************************
-"""
-
-
-def set_operation(Resorts):
-    set_url_and_html(Resorts)
-    set_operating_dates(Resorts)
-
-
-"""
-   ***************************
-   1/ GET OPEN & CLOSE DATES
+   2/ GET OPEN & CLOSE DATES
    ***************************
 """
 """
@@ -117,7 +120,7 @@ def set_operating_dates(Resorts):
 
 """
    ***************************
-   2/ GET LIFTS & PRICES
+   3/ SET LIFTS & PRICES
    ***************************
 """
 """
@@ -164,6 +167,13 @@ def set_lifts_and_prices(Resorts):
         price_a, price_y, price_c = get_prices(html)
         resort.operation.set_lifts_tickets(lifts, price_a, price_y, price_c)
         print(resort.operation.adult_price)
+
+
+"""
+   ***************************
+   4/ SET RATING & LOCATION
+   ***************************
+"""
 
 
 # create 5 Resort objects
