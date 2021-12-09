@@ -1,4 +1,3 @@
-from main import Resorts
 import requests
 from datetime import date, timedelta
 
@@ -12,10 +11,13 @@ from datetime import date, timedelta
 APP_ID = "39eba088"
 APP_KEY = "fe507959f9cfd3f54af726fc36e63d9a"
 
-# set resort id from api
-resort_ids = ["209004", "303020", "414002", "518005", "916004"]
-for i in range(len(Resorts)):
-    Resorts[i].set_id(resort_ids[i])
+
+# takes in a Resorts list and set their matching ids
+def set_resort_id(Resorts):
+    resort_ids = ["209004", "303020", "414002", "518005", "916004"]
+    for i in range(len(Resorts)):
+        Resorts[i].set_id(resort_ids[i])
+
 
 # get JSON object
 def request(r_id, app_id, app_key):
@@ -24,38 +26,56 @@ def request(r_id, app_id, app_key):
                         .format(r_id, app_id, app_key))
 
 
-# get raw weather data
-Raw_Data = []
-for resort in Resorts:
-    Raw_Data.append(request(resort.resort_id, APP_ID, APP_KEY).json())
-
-# get current date and incoming 7 days' dates
-today = date.today()
-Seven_Days = []
-for i in range(1, 8):
-    next_day = today + timedelta(days=i)
-    Seven_Days.append(next_day.strftime("%d/%m/%Y"))
-print(Seven_Days)
+# take in a Resorts list and get raw weather data of each Resort
+def get_raw_weather(Resorts):
+    raw_data = []
+    for resort in Resorts:
+        raw_data.append(request(resort.resort_id, APP_ID, APP_KEY).json())
+    return raw_data
 
 
-# populate the core weather data into all resort objects
-def set_weather():
-    for d in range(len(Seven_Days)):
+# return the list of incoming 7 days' dates based on current dates
+def get_forecast_week():
+    today = date.today()
+    seven_days = []
+    for i in range(1, 8):
+        next_day = today + timedelta(days=i)
+        seven_days.append(next_day.strftime("%d/%m/%Y"))
+    return seven_days
+
+
+'''
+    :Resorts: the list of Resorts objects
+'''
+#  set core weather data into Resorts objects
+def set_weather(Resorts):
+    set_resort_id(Resorts)
+    raw_data = get_raw_weather(Resorts)
+    seven_days = get_forecast_week()
+    set_weather_helper2(Resorts, raw_data, seven_days)
+
+
+'''
+    :Resorts: the list of Resorts objects
+    :raw_data: the list of full weather data without processed
+    :seven_days: the list of the forecasting week from now
+'''
+# extract the core weather data from raw data on a future week, and populate them into all resort objects
+def set_weather_helper2(Resorts, raw_data, seven_days):
+    for d in range(len(seven_days)):
         for r in range(len(Resorts)):
-            set_weather_helper(Seven_Days[d], Raw_Data[r], Resorts[r], d)
+            set_weather_helper1(seven_days[d], raw_data[r], Resorts[r], d)
 
 
 '''
-@forecast_date: the date of which weather to be forecasted
-@raw_data: the full weather data without processed
-@resort: the particular resort which weather to be forecasted
-@kth_day: the Kth day need to be forecasted from now
+    :forecast_date: the date of which weather to be forecasted
+    :raw_data: the full weather data of each Resort without processed
+    :resort: the particular resort which weather to be forecasted
+    :kth_day: the Kth day need to be forecasted from now
 '''
-
-
-# abstract real-time core weather data and update in objects
-def set_weather_helper(forecast_date, raw_data, each_resort, kth_day):
-    for day in raw_data["forecast"]:
+# abstract real-time core weather data on a single day and update in a single Resort object
+def set_weather_helper1(forecast_date, each_raw_data, each_resort, kth_day):
+    for day in each_raw_data["forecast"]:
         if forecast_date in day.values():
             # choose date between 10am - 12am
             if "10:00" in day.values() \
@@ -72,7 +92,3 @@ def set_weather_helper(forecast_date, raw_data, each_resort, kth_day):
                     day["base"]["temp_f"],
                     day["base"]["windspd_mph"]
                 )
-
-
-# populate the core weather data into resort object
-set_weather()
