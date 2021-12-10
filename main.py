@@ -14,10 +14,14 @@ def help_command(update, context):
 def handle_message(update, context):
     # receive the text form user
     text = str(update.message.text).lower()
-    # process it
-    response = R.sample_responses(text)
-    # reply to user
-    update.message.reply_text(response)
+    # able to handle multiple return value
+    return_value = R.sample_responses(text)
+    for response in return_value:
+        update.message.reply_text(response)
+    # # process it
+    # response = R.sample_responses(text)
+    # # reply to user
+    # update.message.reply_text(response)
 
 # logs the errors
 def error(update, context):

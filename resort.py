@@ -9,9 +9,6 @@ class Resort:
     def __init__(self, name):
         self.name = name
         self.resort_id = None
-        # self.rating = self.operation.rating
-        # self.location = self.operation.location
-
 
         # operation info
         self.operation = Operation()
@@ -21,18 +18,6 @@ class Resort:
                         Weather(), Weather(),
                         Weather(), Weather()]
 
-        self.tickets = None
-        self.hotels = None
-        self.restaurants = None
-
     # set unique api resort id
     def set_id(self, resort_id):
         self.resort_id = resort_id
-
-    # hotel
-    def set_hotels(self, hotels):
-        self.hotels = hotels
-
-    # restaurants
-    def set_restaurants(self, restaurants):
-        self.restaurants = restaurants

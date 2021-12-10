@@ -19,3 +19,15 @@ def populate_data():
     set_weather(Resorts)
     set_operation(Resorts)
     return Resorts
+
+'''
+    Methods used for printing data
+    
+    1/ print resorts name and location
+    2/
+'''
+def print_resorts(Resorts):
+    info = ""
+    for resort in Resorts:
+        info += resort.name + "  --  "  + resort.operation.location + "\n"
+    return info.strip()
