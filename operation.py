@@ -26,6 +26,10 @@ class Operation:
         self.open_date = open
         self.close_date = close
 
+    # set operating status
+    def set_status(self, status):
+        self.status = status
+
     # set lifts and prices
     def set_lifts_tickets(self, lifts, adult_price,
                           youth_price, child_price):
@@ -38,5 +42,3 @@ class Operation:
     def set_rating_location(self, rating, location):
         self.rating = rating
         self.location = location
-
-

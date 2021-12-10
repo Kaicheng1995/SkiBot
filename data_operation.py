@@ -1,23 +1,23 @@
 from urllib.request import urlopen
 from dateutil.parser import parse
-from resort import Resort
-
-from datetime import datetime
-import re
+from datetime import date
+import datetime
 
 
 """
    SUMMARY: set operating data into Resort objects list   
    1/ SET URL & HTML
    2/ SET OPEN & CLOSE DATES
-   3/ SET #LIFTS & PRICES 
+   3/ SET STATUS
+   4/ SET #LIFTS & PRICES
+   5/ SET RATING & LOCATION
 """
-
 def set_operation(Resorts):
     set_url_and_html(Resorts)
     set_operating_dates(Resorts)
+    set_status(Resorts)
     set_lifts_and_prices(Resorts)
-
+    set_rating_and_location(Resorts)
 
 
 """
@@ -59,7 +59,7 @@ def set_url_and_html(Resorts):
 
 """
    ***************************
-   2/ GET OPEN & CLOSE DATES
+   2/ SET OPEN & CLOSE DATES
    ***************************
 """
 """
@@ -74,16 +74,16 @@ def get_operating_dates(html):
     open_index = html.find('<td id="selSeason">') + len('<td id="selSeason">') + 1
     open_index_end = open_index + 10
     open_date = html[open_index: open_index_end]
-    # check no data available
+    # if no data available, update manually
     if not is_date(open_date):
-        open_date = "Not Available"
+        open_date = "2021-12-01"
 
     # find close_date
     close_index = open_index_end + 3
     close_index_end = close_index + 10
     close_date = html[close_index: close_index_end]
     if not is_date(close_date):
-        close_date = "Not Available"
+        close_date = "2022-04-15"
 
     # return operating dates
     return open_date, close_date
@@ -115,12 +115,38 @@ def set_operating_dates(Resorts):
         html = resort.operation.html
         open_date, close_date = get_operating_dates(html)
         resort.operation.set_operating_dates(open_date, close_date)
-        print(resort.operation.open_date)
 
 
 """
    ***************************
-   3/ SET LIFTS & PRICES
+   3/ SET STATUS
+   ***************************
+"""
+# compare the current time and open date, return status
+def is_open(open_d):
+    # convert string to comparable date variable: year, month, day
+    open_date = datetime.date(int(open_d[:4]), int(open_d[5:7]), int(open_d[-2:]))
+    today = date.today()
+    t = today.strftime("%Y/%m/%d")
+    now = datetime.date(int(t[:4]), int(t[5:7]), int(t[-2:]))
+    # compare
+    if now >= open_date:
+        return True
+    return False
+
+
+# takes the Resorts list and set operating status
+def set_status(Resorts):
+    for resort in Resorts:
+        if is_open(resort.operation.open_date):
+            resort.operation.set_status("open")
+        else:
+            resort.operation.set_status("closed")
+
+
+"""
+   ***************************
+   4/ SET LIFTS & PRICES
    ***************************
 """
 """
@@ -166,25 +192,29 @@ def set_lifts_and_prices(Resorts):
         lifts = get_lifts(html)
         price_a, price_y, price_c = get_prices(html)
         resort.operation.set_lifts_tickets(lifts, price_a, price_y, price_c)
-        print(resort.operation.adult_price)
 
 
 """
    ***************************
-   4/ SET RATING & LOCATION
+   5/ SET RATING & LOCATION
    ***************************
 """
+def get_rating(html):
+    # find the rating of the resort
+    prefix = '<div class=" rating-list star-wrap stars-big-grey" title="'
+    start_index = html.find(prefix) + len(prefix)
+    end_index = start_index + 18
+    rating = html[start_index: end_index]
+    return rating
 
+def get_location():
+    return ["Lake Tahoe, CA", "Aspen, CO",
+            "Pierce County, WA", "North Creek, NY",
+            "Lake Tahoe, CA"]
 
-# create 5 Resort objects
-kirkwood = Resort("Kirkwood")
-aspen = Resort("Aspen Snowmass")
-crystal = Resort("Crystal Mountain")
-gore = Resort("Gore Mountain")
-heavenly = Resort("Heavenly")
-
-# append all resorts objects to a list
-Resorts = [kirkwood, aspen, crystal, gore, heavenly]
-set_url_and_html(Resorts)
-
-set_lifts_and_prices(Resorts)
+def set_rating_and_location(Resorts):
+    for i in range(len(Resorts)):
+        html = Resorts[i].operation.html
+        rating = get_rating(html)
+        location = get_location()[i]
+        Resorts[i].operation.set_rating_location(rating, location)
