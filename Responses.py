@@ -7,8 +7,6 @@ Resorts = populate_data()
 """
     takes in user message and return a tuple of responses
 """
-
-
 def sample_responses(input_text):
     user_message = str(input_text).lower()
 
@@ -39,10 +37,26 @@ def sample_responses(input_text):
         return head + "\n" * 2 + info, tail
 
     # 4/ask plan (on a single day)
+    for after_days in range(1, 8):
+        show_weather(user_message, "kirkwood", after_days, 0)
+        show_weather(user_message, "aspen snowmass", after_days, 1)
+        show_weather(user_message, "crystal mountain", after_days, 2)
+        show_weather(user_message, "gore mountain", after_days, 3)
+        show_weather(user_message, "heavenly", after_days, 4)
 
+    # 5/search info (any day, unlimited to a single day)
+    factors = ["weather", "snowfall", "rainfall", "visibility", "temperature",
+               "ticket price", "open date", "close date", "number of lifts", "rating"]
+    for after_days in range(1, 8):
+        for factor in factors:
+            search_info(user_message, "kirkwood", factor, after_days, 0)
+            search_info(user_message, "aspen snowmass", factor, after_days, 0)
+            search_info(user_message, "crystal mountain", factor, after_days, 0)
+            search_info(user_message, "gore mountain", factor, after_days, 0)
+            search_info(user_message, "heavenly", factor, after_days, 0)
 
     # return sorry if it can't match user message
-    return "Sorry, I don't understand." + "\n" +\
+    return "Sorry, I don't understand." + "\n" + \
            'Type "/help" to get instructions',
 
 
@@ -52,13 +66,12 @@ def sample_responses(input_text):
     :after_days: the number of days after today
     :index: the list index of each resort in Resorts
 """
-
-
 def show_weather(user_message, resort_name, after_days, index):
-    if user_message in ("I wanna go to {0} on {1}".format(resort_name, after_days),
-                        "I wanna go to {0} after one day".format(resort_name),
-                        "I wanna go to {0} tomorrow".format(resort_name),):
-        head = "Okay, here's the forecast weather in {0}:".format(resort_name)
+    if user_message in ("I wanna go to {0} on {1}"
+                                .format(resort_name, after_today(after_days)),
+                        "I wanna go to {0} after {1} days"
+                                .format(resort_name, after_days)):
+        head = "Okay, here's the forecast weather on that date:".format(resort_name)
         info = Resorts[index].weather[after_days].__str__()
         tail = "Do you have any other questions?"
         return head + "\n" * 2 + info, tail
@@ -75,15 +88,17 @@ def show_weather(user_message, resort_name, after_days, index):
     :after_days: the number of days after today
     :index: the list index of each resort in Resorts
 """
+
+
 def search_info(user_message, factor_name, resort_name, after_days, index):
     if user_message in ("{0} in {1} on {2}"  # with specific day
-                                .format(factor_name, resort_name, after_days),
+                                .format(factor_name, resort_name, after_today(after_days)),
                         "can you tell me the {0} in {1} on {2}"
-                                .format(factor_name, resort_name, after_days),
+                                .format(factor_name, resort_name, after_today(after_days)),
                         "show me the {0} in {1} on {2}"
-                                .format(factor_name, resort_name, after_days),
+                                .format(factor_name, resort_name, after_today(after_days)),
                         "what is the {0} in {1} on {2}"
-                                .format(factor_name, resort_name, after_days),
+                                .format(factor_name, resort_name, after_today(after_days)),
                         "{0} in {1}"  # without specific day
                                 .format(factor_name, resort_name),
                         "can you tell me the {0} in {1}"
