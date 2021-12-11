@@ -7,6 +7,8 @@ Resorts = populate_data()
 """
     takes in user message and return a tuple of responses
 """
+
+
 def sample_responses(input_text):
     user_message = str(input_text).lower()
 
@@ -28,13 +30,21 @@ def sample_responses(input_text):
         return head + "\n" * 2 + info, tail
 
     # 3/ask resort
-    if user_message in ("kirkwood",
-                        "i want to go to kirkwood",
-                        "i prefer kirkwood",):
-        head = "Here are some operating information of the kirkwood resort:"
-        info = print_operation(Resorts[0])
-        tail = "When do you plan to go?"
-        return head + "\n" * 2 + info, tail
+    head, tail = show_resort(user_message, "kirkwood", 0)
+    if head is not None and tail is not None:
+        return head, tail
+    head, tail = show_resort(user_message, "aspen snowmass", 0)
+    if head is not None and tail is not None:
+        return head, tail
+    head, tail = show_resort(user_message, "crystal moountain", 0)
+    if head is not None and tail is not None:
+        return head, tail
+    head, tail = show_resort(user_message, "gore mountain", 0)
+    if head is not None and tail is not None:
+        return head, tail
+    head, tail = show_resort(user_message, "heavenly", 0)
+    if head is not None and tail is not None:
+        return head, tail
 
     # 4/ask plan (on a single day)
     for after_days in range(1, 6):
@@ -75,9 +85,38 @@ def sample_responses(input_text):
             if head is not None and tail is not None:
                 return head, tail
 
-    # return sorry if it can't match user message
+    # 6/exit
+    if user_message in ("bye", "goodbye",):
+        tail = "Have a nice day!"
+        return tail,
+
+    # 7/return sorry if it can't match user message
     return "Sorry, I don't understand." + "\n" + \
            'Type or click /help to get instructions',
+
+
+# helper fuctions:
+# 1/ show_resort: print resort's operating informaton
+# 2/ show_weather: print weather information
+# 3/ search_info: print any information
+# 4/ after_today: calculate the date after some days
+"""
+    :user_message: the user's input
+    :resort_name: the name of a resort
+    :index: the list index of each resort in Resorts
+"""
+
+
+def show_resort(user_message, resort_name, index):
+    if user_message in ("{0}".format(resort_name),
+                        "i want to go to {0}".format(resort_name),
+                        "i prefer {0}".format(resort_name),):
+        head = "Here are some operating information of the {0} resort:".format(resort_name)
+        info = print_operation(Resorts[index])
+        tail = "When do you plan to go?"
+        return head + "\n" * 2 + info, tail
+    # if don't match anything, return two None
+    return None, None
 
 
 """
@@ -86,6 +125,8 @@ def sample_responses(input_text):
     :after_days: the number of days after today
     :index: the list index of each resort in Resorts
 """
+
+
 def show_weather(user_message, resort_name, after_days, index):
     if user_message in ("i wanna go to {0} on {1}"
                                 .format(resort_name, after_today(after_days)),
@@ -148,25 +189,25 @@ def search_info(user_message, factor_name, resort_name, after_days, index):
                 for i in range(5):
                     info += Resorts[index].weather[i].print_snowfall() + "\n" + "\n"
             else:
-                info = Resorts[index].weather[after_days - 1].snow_in
+                info = str(Resorts[index].weather[after_days - 1].snow_in) + "(inch)"
         elif factor_name == "rainfall":
             if user_message[-13:-11] != "on":
                 for i in range(5):
                     info += Resorts[index].weather[i].print_rainfall() + "\n" + "\n"
             else:
-                info = Resorts[index].weather[after_days - 1].rain_in
+                info = str(Resorts[index].weather[after_days - 1].rain_in) + "(inch)"
         elif factor_name == "visibility":
             if user_message[-13:-11] != "on":
                 for i in range(5):
                     info += Resorts[index].weather[i].print_visibility() + "\n" + "\n"
             else:
-                info = Resorts[index].weather[after_days - 1].vis_mi
+                info = str(Resorts[index].weather[after_days - 1].vis_mi) + "(inch)"
         elif factor_name == "temperature":
             if user_message[-13:-11] != "on":
                 for i in range(5):
                     info += Resorts[index].weather[i].print_temperature() + "\n" + "\n"
             else:
-                info = Resorts[index].weather[after_days - 1].temp_f
+                info = str(Resorts[index].weather[after_days - 1].temp_f) + "(F)"
 
         # search objects in class operation
         elif factor_name == "ticket price":
@@ -176,7 +217,7 @@ def search_info(user_message, factor_name, resort_name, after_days, index):
         elif factor_name == "close date":
             info = Resorts[index].operation.print_close()
         elif factor_name == "number of lifts":
-            info = Resorts[index].operation.lifts
+            info = str(Resorts[index].operation.lifts)
         elif factor_name == "rating":
             info = Resorts[index].operation.rating
 

@@ -66,13 +66,13 @@ class Operation:
         return out
 
     def print_open(self):
-        out = "Open Date: " + str(self.open_date)[5:7] \
-              + str(self.open_date)[8:] \
+        out = "Open Date: " + str(self.open_date)[5:7] + "/" \
+              + str(self.open_date)[8:] + "/" \
               + str(self.open_date)[:4]
         return out
 
     def print_close(self):
-        out = "Close Date: " + str(self.close_date)[5:7] \
-              + str(self.close_date)[8:] \
+        out = "Close Date: " + str(self.close_date)[5:7] + "/" \
+              + str(self.close_date)[8:] + "/" \
               + str(self.close_date)[:4]
         return out
