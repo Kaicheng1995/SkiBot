@@ -12,7 +12,7 @@ def help_command(update, context):
 
 # handle the user message and give a reply
 def handle_message(update, context):
-    # receive the text form user
+    # receive the text from user
     text = str(update.message.text).lower()
     # able to handle multiple return value
     return_value = R.sample_responses(text)

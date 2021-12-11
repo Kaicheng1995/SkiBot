@@ -31,7 +31,8 @@ class Weather:
         self.windspd_mph = windspd_mph
 
     def __str__(self):
-        out = "Date: " + str(self.date) + "\n" + \
+        out = "Date: " + str(self.date)[3:5] + "/" + \
+              str(self.date)[:2] + str(self.date)[5:] + "\n" + \
               "Weather: " + str(self.wx_desc) + "\n" + \
               "Snowfall (inch): " + str(self.snow_in) + "\n" + \
               "Rainfall (inch): " + str(self.rain_in) + "\n" + \

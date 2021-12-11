@@ -47,12 +47,12 @@ class Operation:
     def __str__(self):
         out = "Rating: " + str(self.rating) + "\n" + \
               "Status: " + str(self.status) + "\n" + \
-              "Open Date: " + str(self.open_date)[3:6] \
-              + str(self.open_date)[0:3] \
-              + str(self.open_date)[6:] + "\n" + \
-              "Close Date: " + str(self.close_date)[3:6] \
-              + str(self.close_date)[0:3] \
-              + str(self.close_date)[6:] + "\n" + \
+              "Open Date: " + str(self.open_date)[5:7] \
+              + "/" + str(self.open_date)[8:] \
+              + "/" + str(self.open_date)[:4] + "\n" + \
+              "Close Date: " + str(self.close_date)[5:7] \
+              + "/" + str(self.close_date)[8:] \
+              + "/" + str(self.close_date)[:4] + "\n" + \
               "Price for Adult: " + str(self.adult_price) + "\n" + \
               "Price for Youth: " + str(self.youth_price) + "\n" + \
               "Price for Child: " + str(self.child_price) + "\n" + \
@@ -66,13 +66,13 @@ class Operation:
         return out
 
     def print_open(self):
-        out = "Open Date: " + str(self.open_date)[3:6] \
-              + str(self.open_date)[0:3] \
-              + str(self.open_date)[6:]
+        out = "Open Date: " + str(self.open_date)[5:7] \
+              + str(self.open_date)[8:] \
+              + str(self.open_date)[:4]
         return out
 
     def print_close(self):
-        out = "Close Date: " + str(self.close_date)[3:6] \
-              + str(self.close_date)[0:3] \
-              + str(self.close_date)[6:]
+        out = "Close Date: " + str(self.close_date)[5:7] \
+              + str(self.close_date)[8:] \
+              + str(self.close_date)[:4]
         return out
