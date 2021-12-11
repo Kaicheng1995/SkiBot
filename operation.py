@@ -6,15 +6,15 @@ class Operation:
         self.url = None
         self.html = None
         # the data collected from the url
-        self.status = ""       # currently open / closed
-        self.open_date = ""    # open date
-        self.close_date = ""   # closed date
-        self.lifts = 0         # number of lifts
-        self.adult_price = 0   # lift tickets price - adult
-        self.youth_price = 0   # lift tickets price - youth
-        self.child_price = 0   # lift tickets price - child
-        self.rating = ""       # rating score
-        self.location = ""     # location
+        self.status = ""  # currently open / closed
+        self.open_date = ""  # open date
+        self.close_date = ""  # closed date
+        self.lifts = 0  # number of lifts
+        self.adult_price = 0  # lift tickets price - adult
+        self.youth_price = 0  # lift tickets price - youth
+        self.child_price = 0  # lift tickets price - child
+        self.rating = ""  # rating score
+        self.location = ""  # location
 
     # set the url and html used for web scraping
     def set_source(self, url, html):
@@ -42,3 +42,25 @@ class Operation:
     def set_rating_location(self, rating, location):
         self.rating = rating
         self.location = location
+
+    # print operating info
+    def __str__(self):
+        out = "Rating: " + str(self.rating) + "\n" + \
+              "Status: " + str(self.status) + "\n" + \
+              "Open Date: " + str(self.open_date)[3:6] \
+              + str(self.open_date)[0:3] \
+              + str(self.open_date)[6:] + "\n" + \
+              "Close Date: " + str(self.close_date)[3:6] \
+              + str(self.close_date)[0:3] \
+              + str(self.close_date)[6:] + "\n" + \
+              "Price for Adult: " + str(self.adult_price) + "\n" + \
+              "Price for Youth: " + str(self.youth_price) + "\n" + \
+              "Price for Child: " + str(self.child_price) + "\n" + \
+              "Number of Lifts: " + str(self.lifts)
+        return out
+
+    def print_price(self):
+        out = "Price for Adult: " + str(self.adult_price) + "\n" + \
+              "Price for Youth: " + str(self.youth_price) + "\n" + \
+              "Price for Child: " + str(self.child_price)
+        return out

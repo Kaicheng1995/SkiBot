@@ -18,10 +18,6 @@ def handle_message(update, context):
     return_value = R.sample_responses(text)
     for response in return_value:
         update.message.reply_text(response)
-    # # process it
-    # response = R.sample_responses(text)
-    # # reply to user
-    # update.message.reply_text(response)
 
 # logs the errors
 def error(update, context):

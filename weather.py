@@ -40,3 +40,23 @@ class Weather:
               "Temperature (F): " + str(self.temp_f) + "\n" + \
               "Wind Speed: (mhp): " + str(self.windspd_mph)
         return out
+
+    def print_snowfall(self):
+        out = "Date: " + str(self.date) + "\n" + \
+              "Snowfall (inch): " + str(self.snow_in)
+        return out
+
+    def print_rainfall(self):
+        out = "Date: " + str(self.date) + "\n" + \
+              "Rainfall (inch): " + str(self.rain_in)
+        return out
+
+    def print_visibility(self):
+        out = "Date: " + str(self.date) + "\n" + \
+              "Visibility (inch): " + str(self.vis_mi)
+        return out
+
+    def print_temperature(self):
+        out = "Date: " + str(self.date) + "\n" + \
+              "Temperature (F): " + str(self.temp_f)
+        return out

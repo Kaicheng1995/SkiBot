@@ -24,10 +24,14 @@ def populate_data():
     Methods used for printing data
     
     1/ print resorts name and location
-    2/
+    2/ print the operating info of a resort
 '''
 def print_resorts(Resorts):
     info = ""
     for resort in Resorts:
         info += resort.name + "  --  "  + resort.operation.location + "\n"
     return info.strip()
+
+def print_operation(resort):
+    info = resort.operation.__str__()
+    return info
