@@ -19,8 +19,8 @@ def sample_responses(input_text):
     # 2/ask recommendation
     if user_message in ("resorts",
                         "ski resorts",
-                        "go ski",
-                        "i want to go ski",
+                        "go skiing",
+                        "i want to go skiing",
                         "please show me some ski resorts",
                         "can you recommend to me some ski resorts?",
                         "can you tell me some recently opened ski resorts?",):
@@ -36,7 +36,7 @@ def sample_responses(input_text):
     head, tail = show_resort(user_message, "aspen snowmass", 0)
     if head is not None and tail is not None:
         return head, tail
-    head, tail = show_resort(user_message, "crystal moountain", 0)
+    head, tail = show_resort(user_message, "crystal mountain", 0)
     if head is not None and tail is not None:
         return head, tail
     head, tail = show_resort(user_message, "gore mountain", 0)
@@ -131,6 +131,8 @@ def show_weather(user_message, resort_name, after_days, index):
     if user_message in ("i wanna go to {0} on {1}"
                                 .format(resort_name, after_today(after_days)),
                         "i wanna go to {0} after {1} days"
+                                .format(resort_name, after_days),
+                        "i wanna go to {0} after {1} day"
                                 .format(resort_name, after_days)):
         head = "Okay, here's the forecast weather on that date:".format(resort_name)
         info = Resorts[index].weather[after_days - 1].__str__()
