@@ -64,3 +64,15 @@ class Operation:
               "Price for Youth: " + str(self.youth_price) + "\n" + \
               "Price for Child: " + str(self.child_price)
         return out
+
+    def print_open(self):
+        out = "Open Date: " + str(self.open_date)[3:6] \
+              + str(self.open_date)[0:3] \
+              + str(self.open_date)[6:]
+        return out
+
+    def print_close(self):
+        out = "Close Date: " + str(self.close_date)[3:6] \
+              + str(self.close_date)[0:3] \
+              + str(self.close_date)[6:]
+        return out
