@@ -5,14 +5,10 @@ https://www.dataquest.io/blog/python-api-tutorial/
 
 
 
-
-
 ________________________
 future extension:
 - running speed：当用户请求时，每次都要request url，导致效率有点低
 - conversation 的流畅性，对话内对话的
-
-
 
 
 

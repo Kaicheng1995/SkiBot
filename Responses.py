@@ -1,3 +1,5 @@
+import sys
+sys.path.append('/Users/kai/PycharmProjects/pythonProject1/SkiBot/Data')
 from database import *
 from datetime import date, timedelta
 
