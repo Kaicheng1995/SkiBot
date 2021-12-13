@@ -29,8 +29,8 @@ def sample_responses(input_text):
                         "go skiing",
                         "i want to go skiing",
                         "please show me some ski resorts",
-                        "can you recommend to me some ski resorts?",
-                        "can you tell me some recently opened ski resorts?",):
+                        "can you recommend to me some ski resorts",
+                        "can you tell me some recently opened ski resorts",):
         head = "Okay. Five ski resorts are currently or about to open:"
         info = print_resorts(Resorts)
         tail = "Where do you want to go?"
