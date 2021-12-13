@@ -1,8 +1,13 @@
 from database import *
-from datetime import date, datetime, timedelta
+from datetime import date, timedelta
 
-# get real time Resorts data
+# get real time Resorts data (not real real-time)
 Resorts = populate_data()
+
+# however, if we want real real-time, we should update data each time user query anything
+# def get_real_time_resorts():
+#     return populate_data()
+
 
 """
     takes in user message and return a tuple of responses
@@ -95,7 +100,7 @@ def sample_responses(input_text):
            'Type or click /help to get instructions',
 
 
-# helper fuctions:
+# helper functions:
 # 1/ show_resort: print resort's operating informaton
 # 2/ show_weather: print weather information
 # 3/ search_info: print any information
