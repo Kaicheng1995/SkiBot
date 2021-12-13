@@ -6,9 +6,10 @@
 For snowboarders, we always hope to know some data about ski resorts, such as the amount of snowfall, the opening date, the ticket prices.
 For our convenience, I created a chatbot named **`SkiBot`** for querying those data with user messages in real-time. As you can see as follows:
 
-<div align=center>
-<img src="https://github.com/Kaicheng1995/Best-README-Template/blob/master/Screen%20Shot%202021-12-12%20at%202.06.52%20PM.png" width="350"></div>
-
+<p align="middle">
+  <img src="https://github.com/Kaicheng1995/SkiBot/blob/main/Note/demo2.png" width="350">
+  <img src="https://github.com/Kaicheng1995/SkiBot/blob/main/Note/demo1.png" width="350"> 
+</p>
 
 Here's the functionality that SkiBot has:
 * Query the real-time forecast weather data in a particular ski resort on a particular date. The forecast data supports the future five days from now on. The weather feature includes:
