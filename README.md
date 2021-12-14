@@ -38,7 +38,7 @@ Here's the functionality that SkiBot has:
 ### Built With
 
 * [Telegram Bot API](https://core.telegram.org/bots/api)
-* [Weather Unlocked API](https://developer.weatherunlocked.com/documentation/skiresort)
+* [Ski Resort API](https://developer.weatherunlocked.com/documentation/skiresort)
 * [Python Request Library](https://docs.python-requests.org/en/latest/)
 * [Python Datetime Library](https://docs.python.org/3/library/datetime.html)
 * [Python Urllib.request Library](https://docs.python.org/3/library/urllib.request.html)
